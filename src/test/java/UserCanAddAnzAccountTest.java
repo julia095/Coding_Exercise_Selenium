@@ -2,14 +2,17 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import ucaa.pages.BankAccountsDetailsPage;
-import ucaa.pages.BankAccountsPage;
-import ucaa.pages.LoginPage;
+import pages.BankAccountsDetailsPage;
+import pages.BankAccountsPage;
+import pages.LoginPage;
 
 import static org.junit.Assert.assertTrue;
 
 public class UserCanAddAnzAccountTest {
     private WebDriver driver;
+    private LoginPage loginPage;
+    private BankAccountsPage bankAccountsPage;
+    private BankAccountsDetailsPage bankAccountsDetailsPage;
 
     @BeforeClass
     public static void setupClass() {
@@ -19,6 +22,11 @@ public class UserCanAddAnzAccountTest {
     @Before
     public void setUp()  {
         driver = new ChromeDriver();
+        loginPage = new LoginPage(driver);
+        bankAccountsPage = new BankAccountsPage(driver);
+        bankAccountsDetailsPage = new BankAccountsDetailsPage((driver));
+        loginPage.open();
+        loginPage.login("julia095+test@gmail.com", "password1");
     }
 
     @After
@@ -27,12 +35,7 @@ public class UserCanAddAnzAccountTest {
     }
 
     @Test
-    public void shouldCreateEveryDayANZAccount() {
-        LoginPage loginPage = new LoginPage(driver);
-        BankAccountsPage bankAccountsPage = new BankAccountsPage(driver);
-        BankAccountsDetailsPage bankAccountsDetailsPage = new BankAccountsDetailsPage((driver));
-        loginPage.open();
-        loginPage.login("julia095+test@gmail.com", "password1");
+    public void shouldDisplayCorrectMessageAfterAddingEveryDayANZAccount() {
         bankAccountsPage.open();
         bankAccountsPage.isLoaded();
         bankAccountsPage.addANZBankAccountFromPopularBankLists();

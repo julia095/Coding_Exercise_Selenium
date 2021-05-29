@@ -1,8 +1,8 @@
-package ucaa.pages;
+package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import ucaa.services.Services;
+import utils.Utils;
 
 public class BankAccountsPage extends BasePage {
 
@@ -10,10 +10,10 @@ public class BankAccountsPage extends BasePage {
         super(driver);
     }
 
-    private Services services = new Services(driver);
+    private Utils utils = new Utils(driver);
 
     public void open() {
-        services.waitForElement(getAccountingButtonLocator());
+        utils.waitForElement(getAccountingButtonLocator());
         driver.findElement(getAccountingButtonLocator()).click();
         driver.findElement(getBankAccountsButtonLocator()).click();
     }
@@ -27,12 +27,12 @@ public class BankAccountsPage extends BasePage {
     }
 
     public boolean isLoaded() {
-        return services.waitForElement(getAddBankAccountButtonLocator());
+        return utils.waitForElement(getAddBankAccountButtonLocator());
     }
 
     public void addANZBankAccountFromPopularBankLists() {
         driver.findElement(getAddBankAccountButtonLocator()).click();
-        services.waitForElement(getAnzBankLocator());
+        utils.waitForElement(getAnzBankLocator());
         driver.findElement(getAnzBankLocator()).click();
 
     }

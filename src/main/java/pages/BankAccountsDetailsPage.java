@@ -1,9 +1,9 @@
-package ucaa.pages;
+package pages;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import ucaa.services.Services;
+import utils.Utils;
 
 
 public class BankAccountsDetailsPage extends BasePage {
@@ -12,11 +12,11 @@ public class BankAccountsDetailsPage extends BasePage {
     }
 
     private String shortId = RandomStringUtils.randomNumeric(8);
-    private Services services = new Services(driver);
+    private Utils utils = new Utils(driver);
     public String uniqueAccountName = "test" + shortId;
 
     public boolean isLoaded() {
-        return services.waitForElement(By.xpath("//*[@id=\"formheader-1029\"]/h1"));
+        return utils.waitForElement(By.xpath("//*[@id=\"formheader-1029\"]/h1"));
     }
 
     public void fillAccountDetails() {
